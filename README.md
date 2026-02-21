@@ -4,6 +4,7 @@ A [JHipster](https://www.jhipster.tech/) blueprint that sets the Angular `baseHr
 
 [![NPM version][npm-image]][npm-url]
 [![Generator][github-generator-image]][github-generator-url]
+![GitHub Maintained](https://img.shields.io/maintenance/yes/2026)
 
 ## What it does
 
