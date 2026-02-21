@@ -1,10 +1,19 @@
 {
   "name": "generator-jhipster-yellowbricks-angular-contextpath",
+  "version": "0.1.0",
+  "description": "JHipster blueprint to configure Angular application baseHref via a custom context path",
   "keywords": [
     "yeoman-generator",
     "jhipster-blueprint",
-    "jhipster-8"
+    "jhipster-9",
+    "generator-jhipster-yellowbricks"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/idNoRD/generator-jhipster-yellowbricks-angular-contextpath.git"
+  },
+  "license": "MIT",
+  "author": "idNoRD",
   "bin": {
     "jhipster-yellowbricks-angular-contextpath": "cli/cli.cjs"
   },
