@@ -1,6 +1,6 @@
 {
   "name": "generator-jhipster-yellowbricks-angular-contextpath",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "JHipster blueprint to configure Angular application baseHref via a custom context path",
   "keywords": [
     "yeoman-generator",
