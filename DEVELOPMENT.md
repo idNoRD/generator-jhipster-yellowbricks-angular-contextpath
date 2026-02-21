@@ -72,42 +72,38 @@ npm unlink -g generator-jhipster-yellowbricks-angular-contextpath
 
 ## Releasing to npm
 
-### 1. Make sure the working tree is clean
+Releases are fully automated via **semantic-release**. There is no manual version bump or `npm publish` step.
 
-```bash
-git status
-```
+### How it works
 
-### 2. Bump the version
+Every push to `main` triggers the `Release` GitHub Actions workflow. semantic-release inspects the commit messages since the last release and, if there are releasable commits, it:
 
-```bash
-npm version patch   # or minor / major
-```
+1. Determines the next version (patch / minor / major)
+2. Updates `package.json`
+3. Commits the version bump (`chore(release): x.y.z [skip ci]`)
+4. Creates a git tag and a GitHub release with generated release notes
+5. Publishes to npm
 
-This updates `package.json`, commits the change, and creates a git tag.
+If there are no releasable commits, nothing happens.
 
-### 3. Push the tag
+### Commit message convention
 
-```bash
-git push origin main --tags
-```
+semantic-release uses [Conventional Commits](https://www.conventionalcommits.org/) to determine the version bump:
 
-### 4. Publish
+| Commit prefix      | Example                                | Version bump |
+| ------------------ | -------------------------------------- | ------------ |
+| `fix:`             | `fix: handle missing outputPath`       | patch        |
+| `feat:`            | `feat: support multiple context paths` | minor        |
+| `BREAKING CHANGE:` | `feat!: rename contextPath option`     | major        |
 
-```bash
-npm publish
-```
+Commits with other prefixes (`chore:`, `docs:`, `test:`, etc.) do not trigger a release.
 
-If publishing for the first time or to a public registry:
+### One-time setup on npmjs.com
 
-```bash
-npm publish --access public
-```
+Before the first automated publish, configure a Trusted Publisher on npmjs.com so npm accepts the OIDC token from GitHub Actions (no stored secret needed):
 
-### Version conventions
-
-| Change type                        | Command             |
-| ---------------------------------- | ------------------- |
-| Bug fix                            | `npm version patch` |
-| New feature (backwards compatible) | `npm version minor` |
-| Breaking change                    | `npm version major` |
+1. Go to **npmjs.com → your package → Settings → Trusted Publishers**
+2. Add GitHub Actions:
+   - Owner: `idNoRD`
+   - Repository: `generator-jhipster-yellowbricks-angular-contextpath`
+   - Workflow: `publish.yml`
