@@ -34,11 +34,31 @@ npm install -g generator-jhipster-yellowbricks-angular-contextpath
 
 ## Usage
 
+### Standard generator
+
 Run JHipster with this blueprint and pass your desired context path:
 
 ```bash
 jhipster --blueprints yellowbricks-angular-contextpath \
   --yellowbricks-angular-contextpath-config='{"contextPath":"/jh/"}'
+```
+
+### With `import-jdl`
+
+`import-jdl` does not support blueprint-specific CLI options. Create a `.yo-rc.json` in your project directory first:
+
+```json
+{
+  "generator-jhipster-yellowbricks-angular-contextpath": {
+    "contextPath": "/jh/"
+  }
+}
+```
+
+Then run:
+
+```bash
+jhipster import-jdl your-app.jdl --blueprints yellowbricks-angular-contextpath
 ```
 
 Replace `/jh/` with your actual context path. The trailing slash is required.
