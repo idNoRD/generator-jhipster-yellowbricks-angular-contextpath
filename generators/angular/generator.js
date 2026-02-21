@@ -84,7 +84,72 @@ export default class extends BaseApplicationGenerator {
 
   get [BaseApplicationGenerator.POST_WRITING]() {
     return this.asPostWritingTaskGroup({
-      async postWritingTemplateTask() {},
+      async addBaseHref() {
+        const contextPath = this.blueprintConfig.contextPath;
+        if (!contextPath) {
+          this.log.warn(
+            '[base-href blueprint] contextPath not configured — pass --yellowbricks-angular-contextpath-config=\'{"contextPath":"/jh/"}\' when running jhipster',
+          );
+          return;
+        }
+
+        this.editFile('angular.json', { ignoreNonExisting: true }, content => {
+          const json = JSON.parse(content);
+          const projectName = Object.keys(json.projects ?? {})[0];
+          const build = json.projects?.[projectName]?.architect?.build;
+
+          // --- drift detection: verify expected surrounding structure ---
+          const expectedBuilder = '@angular-builders/custom-esbuild:application';
+
+          if (!build) {
+            this.log.warn(
+              '[base-href blueprint] angular.json: architect.build section not found — manual intervention needed',
+            );
+            return content;
+          }
+          if (build.builder !== expectedBuilder) {
+            this.log.warn(
+              `[base-href blueprint] angular.json: expected builder "${expectedBuilder}" but found "${build.builder ?? 'undefined'}" — manual intervention needed`,
+            );
+            return content;
+          }
+          if (!build.options) {
+            this.log.warn(
+              '[base-href blueprint] angular.json: architect.build.options not found — manual intervention needed',
+            );
+            return content;
+          }
+          if (!Array.isArray(build.options.plugins)) {
+            this.log.warn(
+              '[base-href blueprint] angular.json: build.options.plugins array not found — manual intervention needed',
+            );
+            return content;
+          }
+          if (!build.options.outputPath) {
+            this.log.warn(
+              '[base-href blueprint] angular.json: build.options.outputPath not found — manual intervention needed',
+            );
+            return content;
+          }
+          // --- end drift detection ---
+
+          const previousBaseHref = build.options.baseHref;
+
+          // Remove existing baseHref (if any) then insert as the first key in options
+          const { baseHref: _removed, ...remainingOptions } = build.options;
+          build.options = { baseHref: contextPath, ...remainingOptions };
+
+          if (previousBaseHref && previousBaseHref !== contextPath) {
+            this.log.info(
+              `[base-href blueprint] angular.json: baseHref renamed from "${previousBaseHref}" to "${contextPath}"`,
+            );
+          } else {
+            this.log.info(`[base-href blueprint] angular.json: baseHref "${contextPath}" added successfully`);
+          }
+
+          return `${JSON.stringify(json, null, 2)}\n`;
+        });
+      },
     });
   }
 
