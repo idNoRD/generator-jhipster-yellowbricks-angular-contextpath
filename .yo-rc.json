@@ -1,0 +1,39 @@
+{
+  "generator-jhipster": {
+    "additionalSubGenerators": "",
+    "baseName": "yellowbricks-angular-contextpath",
+    "cli": true,
+    "dynamic": false,
+    "entities": [],
+    "generators": {
+      "angular": {
+        "command": false,
+        "priorities": [
+          "initializing",
+          "prompting",
+          "configuring",
+          "composing",
+          "composingComponent",
+          "loading",
+          "preparing",
+          "postPreparing",
+          "default",
+          "writing",
+          "multistepTransform",
+          "postWriting",
+          "transform",
+          "install",
+          "postInstall",
+          "end"
+        ],
+        "sbs": true,
+        "written": true
+      }
+    },
+    "jhipsterVersion": "9.0.0-beta.3",
+    "js": true,
+    "localBlueprint": false,
+    "sampleWritten": true,
+    "subGenerators": ["angular"]
+  }
+}
