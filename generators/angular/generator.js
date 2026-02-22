@@ -88,7 +88,7 @@ export default class extends BaseApplicationGenerator {
         const contextPath = this.blueprintConfig.contextPath;
         if (!contextPath) {
           this.log.warn(
-            '[base-href blueprint] contextPath not configured — pass --yellowbricks-angular-contextpath-config=\'{"contextPath":"/jh/"}\' when running jhipster',
+            '[base-href blueprint] contextPath not configured — add {"generator-jhipster-yellowbricks-angular-contextpath":{"contextPath":"/jh/"}} to .yo-rc.json',
           );
           return;
         }

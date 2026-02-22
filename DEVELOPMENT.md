@@ -41,13 +41,12 @@ npm link
 
 ### 2. Generate a JHipster app with the blueprint
 
-Create an empty directory, then run JHipster with this blueprint:
+Create an empty directory, create a `.yo-rc.json` with the blueprint config, then run JHipster:
 
 ```bash
 mkdir /tmp/test-app && cd /tmp/test-app
-jhipster \
-  --blueprints yellowbricks-angular-contextpath \
-  --yellowbricks-angular-contextpath-config='{"contextPath":"/jh/"}'
+echo '{"generator-jhipster-yellowbricks-angular-contextpath":{"contextPath":"/jh/"}}' > .yo-rc.json
+jhipster --blueprints yellowbricks-angular-contextpath
 ```
 
 The generator will patch `angular.json` during the `POST_WRITING` phase and add (or overwrite) `baseHref` with the configured context path.
@@ -104,6 +103,6 @@ Before the first automated publish, configure a Trusted Publisher on npmjs.com s
 
 1. Go to **npmjs.com → your package → Settings → Trusted Publishers**
 2. Add GitHub Actions:
-   - Owner: `idNoRD`
-   - Repository: `generator-jhipster-yellowbricks-angular-contextpath`
+   - Owner: `<your github name/org>`
+   - Repository: `generator-jhipster-yellowbricks-<generator>-<purpose>`
    - Workflow: `publish.yml`
