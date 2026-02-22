@@ -6,6 +6,11 @@ A [JHipster](https://www.jhipster.tech/) blueprint that sets the Angular `baseHr
 [![Generator][github-generator-image]][github-generator-url]
 ![GitHub Maintained](https://img.shields.io/maintenance/yes/2026)
 
+## JHipster source
+
+- Generator: [`generators/angular`](https://github.com/jhipster/generator-jhipster/tree/main/generators/angular)
+- Template: [`angular.json.ejs`](https://github.com/jhipster/generator-jhipster/blob/main/generators/angular/templates/angular.json.ejs)
+
 ## What it does
 
 Patches `angular.json` during generation to insert `baseHref` as the first key in `build.options`:
