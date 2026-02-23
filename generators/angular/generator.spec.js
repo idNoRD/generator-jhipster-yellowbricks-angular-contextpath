@@ -15,6 +15,10 @@ function getAngularBuildOptions(runResult) {
   return json.projects[projectName].architect.build.options;
 }
 
+function getProxyConfigContent(runResult) {
+  return runResult._readFile('proxy.config.mjs');
+}
+
 describe('SubGenerator angular of yellowbricks-angular-contextpath JHipster blueprint', () => {
   describe('without contextPath', () => {
     beforeAll(async () => {
@@ -33,6 +37,10 @@ describe('SubGenerator angular of yellowbricks-angular-contextpath JHipster blue
 
     it('should not set baseHref in angular.json', () => {
       expect(getAngularBuildOptions(result).baseHref).toBeUndefined();
+    });
+
+    it('should not modify proxy path in proxy.config.mjs', () => {
+      expect(getProxyConfigContent(result)).toContain("'^/(");
     });
   });
 
@@ -53,6 +61,10 @@ describe('SubGenerator angular of yellowbricks-angular-contextpath JHipster blue
 
     it('should insert baseHref as the first key in build.options', () => {
       expect(Object.keys(getAngularBuildOptions(result))[0]).toBe('baseHref');
+    });
+
+    it('should prefix proxy path with contextPath in proxy.config.mjs', () => {
+      expect(getProxyConfigContent(result)).toContain("'^/jh/(");
     });
   });
 });

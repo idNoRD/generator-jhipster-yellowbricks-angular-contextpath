@@ -93,6 +93,25 @@ export default class extends BaseApplicationGenerator {
           return;
         }
 
+        this.editFile('proxy.config.mjs', { ignoreNonExisting: true }, content => {
+          const updatedPattern = `'^${contextPath}(`;
+
+          if (content.includes(updatedPattern)) {
+            return content;
+          }
+
+          const originalPattern = `'^/(`;
+          if (!content.includes(originalPattern)) {
+            this.log.warn(
+              `[yellowbricks-angular-contextpath] proxy.config.mjs: expected pattern ${originalPattern} not found — manual intervention needed`,
+            );
+            return content;
+          }
+
+          this.log.info(`[yellowbricks-angular-contextpath] proxy.config.mjs: proxy path prefix set to "${contextPath}"`);
+          return content.replace(originalPattern, updatedPattern);
+        });
+
         this.editFile('angular.json', { ignoreNonExisting: true }, content => {
           const json = JSON.parse(content);
           const projectName = Object.keys(json.projects ?? {})[0];
