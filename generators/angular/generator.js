@@ -102,7 +102,9 @@ export default class extends BaseApplicationGenerator {
           const expectedBuilder = '@angular-builders/custom-esbuild:application';
 
           if (!build) {
-            this.log.warn('[yellowbricks-angular-contextpath] angular.json: architect.build section not found — manual intervention needed');
+            this.log.warn(
+              '[yellowbricks-angular-contextpath] angular.json: architect.build section not found — manual intervention needed',
+            );
             return content;
           }
           if (build.builder !== expectedBuilder) {
@@ -112,15 +114,21 @@ export default class extends BaseApplicationGenerator {
             return content;
           }
           if (!build.options) {
-            this.log.warn('[yellowbricks-angular-contextpath] angular.json: architect.build.options not found — manual intervention needed');
+            this.log.warn(
+              '[yellowbricks-angular-contextpath] angular.json: architect.build.options not found — manual intervention needed',
+            );
             return content;
           }
           if (!Array.isArray(build.options.plugins)) {
-            this.log.warn('[yellowbricks-angular-contextpath] angular.json: build.options.plugins array not found — manual intervention needed');
+            this.log.warn(
+              '[yellowbricks-angular-contextpath] angular.json: build.options.plugins array not found — manual intervention needed',
+            );
             return content;
           }
           if (!build.options.outputPath) {
-            this.log.warn('[yellowbricks-angular-contextpath] angular.json: build.options.outputPath not found — manual intervention needed');
+            this.log.warn(
+              '[yellowbricks-angular-contextpath] angular.json: build.options.outputPath not found — manual intervention needed',
+            );
             return content;
           }
           // --- end drift detection ---
@@ -132,7 +140,9 @@ export default class extends BaseApplicationGenerator {
           build.options = { baseHref: contextPath, ...remainingOptions };
 
           if (previousBaseHref && previousBaseHref !== contextPath) {
-            this.log.info(`[yellowbricks-angular-contextpath] angular.json: baseHref renamed from "${previousBaseHref}" to "${contextPath}"`);
+            this.log.info(
+              `[yellowbricks-angular-contextpath] angular.json: baseHref renamed from "${previousBaseHref}" to "${contextPath}"`,
+            );
           } else {
             this.log.info(`[yellowbricks-angular-contextpath] angular.json: baseHref "${contextPath}" added successfully`);
           }
