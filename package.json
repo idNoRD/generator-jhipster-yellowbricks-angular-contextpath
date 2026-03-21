@@ -38,7 +38,7 @@
     "vitest": "vitest"
   },
   "dependencies": {
-    "generator-jhipster": "9.0.0-beta.3"
+    "generator-jhipster": "9.0.0"
   },
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^13.0.1",
@@ -62,7 +62,7 @@
     "yeoman-test": ">=10"
   },
   "engines": {
-    "generator-jhipster": "9.0.0-beta.3",
+    "generator-jhipster": "9.0.0",
     "node": "^22.18.0 || >=24.11.0"
   }
 }
