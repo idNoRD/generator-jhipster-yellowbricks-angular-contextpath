@@ -941,9 +941,6 @@ exports[`SubGenerator angular of yellowbricks-angular-contextpath JHipster bluep
   "src/main/webapp/swagger-ui/index.html": {
     "stateCleared": "modified",
   },
-  "template-file-angular": {
-    "stateCleared": "modified",
-  },
   "tsconfig.app.json": {
     "stateCleared": "modified",
   },
